@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura TROPika — Fragrance That Tells Your Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  color: #3E2723;
+  background: #FEFAE0;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4, .serif {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ===== NAVIGATION ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(27, 67, 50, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+  transition: all 0.3s;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: #FAEDCD; letter-spacing: 1px;
+}
+.nav-logo span { color: #D4A373; }
+.nav-links {
+  display: flex; list-style: none; gap: 2rem; align-items: center;
+}
+.nav-links a {
+  color: #FAEDCD; font-size: 0.9rem; font-weight: 400;
+  letter-spacing: 0.5px; transition: color 0.3s;
+}
+.nav-links a:hover { color: #D4A373; }
+.nav-cta {
+  background: #D4A373; color: #1B4332 !important;
+  padding: 0.5rem 1.4rem; border-radius: 50px;
+  font-weight: 600 !important; font-size: 0.85rem !important;
+  transition: all 0.3s !important;
+}
+.nav-cta:hover { background: #FAEDCD !important; color: #1B4332 !important; transform: translateY(-1px); }
+.menu-toggle { display: none; background: none; border: none; color: #FAEDCD; font-size: 1.6rem; cursor: pointer; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #1B4332 0%, #2D6A4F 35%, #A3B18A 70%, #FAEDCD 100%);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 6rem 2rem 4rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(212,163,115,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(163,177,138,0.2) 0%, transparent 60%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-tag {
+  display: inline-block;
+  background: rgba(250,237,205,0.2);
+  backdrop-filter: blur(10px);
+  color: #FAEDCD; font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase;
+  padding: 0.5rem 1.5rem; border-radius: 50px; margin-bottom: 2rem;
+  border: 1px solid rgba(250,237,205,0.3);
+}
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 700; color: #FAEDCD;
+  line-height: 1.15; margin-bottom: 1.5rem;
+}
+.hero h1 em { font-style: italic; color: #D4A373; }
+.hero-subtitle {
+  font-size: 1.15rem; color: rgba(250,237,205,0.9);
+  font-weight: 300; max-width: 550px; margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block; padding: 0.85rem 2.2rem;
+  border-radius: 50px; font-weight: 600; font-size: 0.95rem;
+  letter-spacing: 0.5px; cursor: pointer; transition: all 0.3s;
+  border: none;
+}
+.btn-gold {
+  background: #D4A373; color: #1B4332;
+  box-shadow: 0 4px 20px rgba(212,163,115,0.35);
+}
+.btn-gold:hover { background: #FAEDCD; transform: translateY(-2px); box-shadow: 0 6px 28px rgba(212,163,115,0.5); }
+.btn-outline {
+  background: transparent; color: #FAEDCD;
+  border: 1.5px solid #FAEDCD;
+}
+.btn-outline:hover { background: rgba(250,237,205,0.1); transform: translateY(-2px); }
+
+/* ===== SECTION COMMON ===== */
+.section { padding: 5rem 2rem; }
+.section-tag {
+  display: inline-block; color: #A3B18A; font-size: 0.8rem;
+  letter-spacing: 3px; text-transform: uppercase; font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: #1B4332; margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.section-desc {
+  color: #6B5B4F; font-size: 1.05rem; max-width: 600px;
+  margin-bottom: 3rem; line-height: 1.7;
+}
+
+/* ===== PRODUCTS ===== */
+.products { background: #FEFAE0; text-align: center; }
+.category-tabs {
+  display: flex; gap: 0.5rem; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 3rem;
+}
+.cat-tab {
+  padding: 0.7rem 1.8rem; border-radius: 50px;
+  border: 1.5px solid #A3B18A; background: transparent;
+  color: #A3B18A; font-weight: 500; cursor: pointer;
+  font-size: 0.9rem; transition: all 0.3s;
+  font-family: 'DM Sans', sans-serif;
+}
+.cat-tab.active, .cat-tab:hover {
+  background: #1B4332; color: #FAEDCD; border-color: #1B4332;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem; max-width: 1100px; margin: 0 auto;
+}
+.product-card {
+  background: #fff; border-radius: 16px; overflow: hidden;
+  text-align: left; transition: all 0.3s;
+  box-shadow: 0 4px 16px rgba(27,67,50,0.06);
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px rgba(27,67,50,0.12);
+}
+.product-img {
+  height: 220px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.product-img .emoji-bg { font-size: 5rem; opacity: 0.9; }
+.pimg-car-1 { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); }
+.pimg-car-2 { background: linear-gradient(135deg, #EFEBE9, #D7CCC8); }
+.pimg-car-3 { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); }
+.pimg-car-4 { background: linear-gradient(135deg, #E0F7FA, #B2EBF2); }
+.pimg-home-1 { background: linear-gradient(135deg, #EDE7F6, #D1C4E9); }
+.pimg-home-2 { background: linear-gradient(135deg, #E8EAF6, #C5CAE9); }
+.pimg-home-3 { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); }
+.pimg-home-4 { background: linear-gradient(135deg, #F1F8E9, #DCEDC8); }
+.pimg-gift-1 { background: linear-gradient(135deg, #FFF8E1, #FFECB3); }
+.pimg-gift-2 { background: linear-gradient(135deg, #FBE9E7, #FFCCBC); }
+.pimg-gift-3 { background: linear-gradient(135deg, #E0F2F1, #B2DFDB); }
+.product-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: #D4A373; color: #1B4332;
+  font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+}
+.product-info { padding: 1.5rem; }
+.product-cat {
+  color: #A3B18A; font-size: 0.75rem;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.product-info h3 { color: #1B4332; margin: 0.4rem 0; font-size: 1.2rem; }
+.product-scent {
+  color: #6B5B4F; font-size: 0.85rem; margin-bottom: 0.5rem;
+  font-style: italic;
+}
+.product-tagline {
+  color: #A3B18A; font-size: 0.85rem; margin-bottom: 1rem;
+  line-height: 1.4;
+}
+.product-price-row {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.product-price {
+  font-size: 1.2rem; font-weight: 700; color: #1B4332;
+}
+.product-price small { font-size: 0.75rem; color: #A3B18A; font-weight: 400; }
+.btn-sm {
+  padding: 0.5rem 1.2rem; font-size: 0.8rem;
+  border-radius: 50px; background: #1B4332; color: #FAEDCD;
+  border: none; cursor: pointer; font-weight: 500;
+  transition: all 0.3s;
+}
+.btn-sm:hover { background: #D4A373; color: #1B4332; }
+
+/* ===== BRAND STORY (Bilingual) ===== */
+.brand-story {
+  background: #1B4332; color: #FAEDCD;
+  padding: 5rem 2rem;
+}
+.brand-inner { max-width: 1000px; margin: 0 auto; }
+.brand-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  margin-top: 2rem;
+}
+.brand-col h3 {
+  color: #D4A373; font-size: 1rem;
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;
+}
+.brand-col h2 {
+  color: #FAEDCD; font-size: 1.6rem; margin-bottom: 1.2rem;
+}
+.brand-col p {
+  color: rgba(250,237,205,0.85);
+  font-size: 0.95rem; line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.brand-divider {
+  width: 60px; height: 3px; background: #D4A373;
+  margin: 2rem 0; border-radius: 2px;
+}
+
+/* ===== PROMOTIONS ===== */
+.promos { background: #FAEDCD; text-align: center; }
+.promo-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem; max-width: 1000px; margin: 0 auto;
+}
+.promo-card {
+  background: #fff; border-radius: 20px; padding: 2.5rem 2rem;
+  text-align: left; position: relative; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(27,67,50,0.06);
+  transition: all 0.3s;
+}
+.promo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(27,67,50,0.12); }
+.promo-icon {
+  font-size: 3rem; margin-bottom: 1rem; display: block;
+}
+.promo-card h3 { color: #1B4332; font-size: 1.5rem; margin-bottom: 0.5rem; }
+.promo-highlight {
+  display: inline-block; background: #D4A373; color: #1B4332;
+  font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 6px;
+  font-size: 0.9rem; margin-bottom: 1rem;
+}
+.promo-detail {
+  color: #6B5B4F; font-size: 0.92rem; line-height: 1.7;
+}
+.promo-code {
+  display: inline-block; margin-top: 1rem;
+  background: #1B4332; color: #FAEDCD;
+  padding: 0.5rem 1.5rem; border-radius: 50px;
+  font-family: monospace; font-size: 1.1rem; letter-spacing: 2px;
+  font-weight: 600;
+}
+.promo-note { color: #A3B18A; font-size: 0.8rem; margin-top: 0.8rem; }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #1B4332; color: #FAEDCD; padding: 4rem 2rem 2rem;
+  text-align: center;
+}
+.footer-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; max-width: 1000px; margin: 0 auto 3rem;
+  text-align: left;
+}
+.footer h4 {
+  color: #D4A373; font-size: 0.85rem;
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem;
+}
+.footer p, .footer li {
+  color: rgba(250,237,205,0.8); font-size: 0.9rem;
+  line-height: 1.8; list-style: none;
+}
+.footer a:hover { color: #D4A373; }
+.social-links { display: flex; gap: 1rem; margin-top: 1rem; }
+.social-link {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(250,237,205,0.1); color: #FAEDCD;
+  font-size: 1.1rem; transition: all 0.3s;
+}
+.social-link:hover { background: #D4A373; color: #1B4332; transform: translateY(-3px); }
+.footer-bottom {
+  border-top: 1px solid rgba(250,237,205,0.15);
+  padding-top: 2rem;
+  color: rgba(250,237,205,0.5); font-size: 0.8rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .menu-toggle { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 64px; left: 0; right: 0;
+    background: #1B4332; padding: 1.5rem 2rem; gap: 1.2rem;
+  }
+  .brand-grid, .promo-grid, .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero { padding: 5rem 1.5rem 3rem; }
+  .section { padding: 3rem 1.5rem; }
+  .product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+}
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .product-info { padding: 1rem; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">Aura<span>TROPika</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#promos">Deals</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav>
+
+<!-- ===== HERO BANNER ===== -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <p class="hero-tag">🌿 Premium Artisan Fragrance</p>
+    <h1>Where Nature<br>Meets <em>Elegance</em></h1>
+    <p class="hero-subtitle">
+      Handcrafted aromas inspired by the lush tropics of Malaysia.
+      Transform every space into your personal sanctuary.
+    </p>
+    <div class="hero-buttons">
+      <a href="#products" class="btn btn-gold">Explore Collection</a>
+      <a href="#story" class="btn btn-outline">Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="section products" id="products">
+  <p class="section-tag">✦ Our Collection</p>
+  <h2 class="section-title">Discover Your Signature Scent</h2>
+  <p class="section-desc" style="margin-left:auto;margin-right:auto;">
+    Three curated collections for every corner of your life — on the road, at home, and for the ones you love.
+  </p>
+
+  <!-- Category Tabs -->
+  <div class="category-tabs">
+    <button class="cat-tab active" onclick="showCategory('car')">🚗 Car Fragrance</button>
+    <button class="cat-tab" onclick="showCategory('home')">🏡 Home Diffuser</button>
+    <button class="cat-tab" onclick="showCategory('gift')">🎁 Gift Box</button>
+  </div>
+
+  <!-- Car Fragrance -->
+  <div class="product-grid cat-car" id="cat-car">
+    <div class="product-card">
+      <div class="product-img pimg-car-1"><span class="emoji-bg">🍋</span></div>
+      <div class="product-info">
+        <p class="product-cat">Car Fragrance</p>
+        <h3>Oasis Drift</h3>
+        <p class="product-scent">Lemongrass · Lime · Mint</p>
+        <p class="product-tagline">Morning breeze through a lemongrass field.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 29<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pimg-car-2"><span class="emoji-bg">🪵</span></div>
+      <div class="product-info">
+        <p class="product-cat">Car Fragrance</p>
+        <h3>Sandalwood Glide</h3>
+        <p class="product-scent">Sandalwood · Cedarwood · Amber</p>
+        <p class="product-tagline">Warm woods that feel like the drive home.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 35<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pimg-car-3"><span class="emoji-bg">🌸</span></div>
+      <div class="product-info">
+        <p class="product-cat">Car Fragrance</p>
+        <h3>Petal Bloom</h3>
+        <p class="product-scent">Jasmine · White Tea · Lily</p>
+        <p class="product-tagline">Floral elegance that softens every journey.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 29<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pimg-car-4"><span class="emoji-bg">🌊</span></div>
+      <div class="product-info">
+        <p class="product-cat">Car Fragrance</p>
+        <h3>Ocean Breeze</h3>
+        <p class="product-scent">Sea Salt · Bergamot · Driftwood</p>
+        <p class="product-tagline">Freedom smells like salt air and open roads.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 32<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Home Diffuser -->
+  <div class="product-grid cat-home" id="cat-home" style="display:none;">
+    <div class="product-card">
+      <div class="product-img pimg-home-1"><span class="emoji-bg">💜</span></div>
+      <div class="product-info">
+        <p class="product-cat">Home Diffuser</p>
+        <h3>Tranquil Nest</h3>
+        <p class="product-scent">Lavender · Chamomile · Vanilla</p>
+        <p class="product-tagline">Wrap your entire home in serenity.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 55<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pimg-home-2"><span class="emoji-bg">🌲</span></div>
+      <div class="product-info">
+        <p class="product-cat">Home Diffuser</p>
+        <h3>Forest Depths</h3>
+        <p class="product-scent">Pine Needle · Oakmoss · Patchouli</p>
+        <p class="product-tagline">Breathe deep — the rainforest is at your doorstep.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 58<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pimg-home-3"><span class="emoji-bg">🔥</span></div>
+      <div class="product-info">
+        <p class="product-cat">Home Diffuser</p>
+        <h3>Vanilla Ember</h3>
+        <p class="product-scent">Vanilla · Amber · Tonka Bean</p>
+        <p class="product-tagline">Like curling up by the fire on a rainy evening.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 52<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pimg-home-4"><span class="emoji-bg">🍊</span></div>
+      <div class="product-info">
+        <p class="product-cat">Home Diffuser</p>
+        <h3>Citrus Grove</h3>
+        <p class="product-scent">Pomelo · Orange Blossom · Green Tea</p>
+        <p class="product-tagline">Sunlight streaming through a citrus orchard.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 50<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gift Box -->
+  <div class="product-grid cat-gift" id="cat-gift" style="display:none;">
+    <div class="product-card">
+      <div class="product-img pimg-gift-1"><span class="emoji-bg">🌟</span></div>
+      <div class="product-info">
+        <p class="product-cat">Gift Box</p>
+        <h3>Raya Spice Set</h3>
+        <p class="product-scent">Oud · Rose · Cinnamon · Cardamom</p>
+        <p class="product-tagline">The scent of togetherness. A Raya celebration in a box.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 128<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pimg-gift-2"><span class="emoji-bg">✨</span></div>
+      <div class="product-info">
+        <p class="product-cat">Gift Box</p>
+        <h3>Golden Harmony</h3>
+        <p class="product-scent">Sandalwood · Turmeric · Honey · Ginger</p>
+        <p class="product-tagline">A luxurious gift that speaks from the heart.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 138<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pimg-gift-3"><span class="emoji-bg">🥥</span></div>
+      <div class="product-info">
+        <p class="product-cat">Gift Box</p>
+        <h3>Tropical Bliss</h3>
+        <p class="product-scent">Coconut · Mango · Frangipani · Lime</p>
+        <p class="product-tagline">A sweet tropical escape, delivered to their door.</p>
+        <div class="product-price-row">
+          <span class="product-price">RM 118<small>.00</small></span>
+          <button class="btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BRAND STORY (Bilingual) ===== -->
+<section class="brand-story" id="story">
+  <div class="brand-inner">
+    <p class="section-tag" style="color:#A3B18A;">✦ Our Story</p>
+    <h2 class="section-title" style="color:#FAEDCD;">Rooted in the Tropics</h2>
+
+    <div class="brand-grid">
+      <!-- English -->
+      <div class="brand-col">
+        <h3>English</h3>
+        <h2>Crafted by Nature, Inspired by Home</h2>
+        <p>
+          Aura TROPika was born in the lush highlands of Malaysia, where the air carries the scent of rain-soaked earth,
+          blooming frangipani, and sun-warmed spices. We believe fragrance is more than just smell — it is memory, mood, and meaning
+          captured in a single breath.
+        </p>
+        <p>
+          Every Aura TROPika product is hand-poured in small batches using sustainably sourced essential oils and natural botanicals.
+          From the car to the living room, our scents are designed to transform everyday spaces into sanctuaries of calm, joy, and connection.
+          No synthetic shortcuts. No harsh chemicals. Just the pure essence of the tropics.
+        </p>
+        <div class="brand-divider"></div>
+        <p style="font-style:italic; color:#D4A373;">
+          "Because every breath you take should feel like coming home."
+        </p>
+      </div>
+
+      <!-- Bahasa Melayu -->
+      <div class="brand-col">
+        <h3>Bahasa Melayu</h3>
+        <h2>Dicipta oleh Alam, Diinspirasi oleh Rumah</h2>
+        <p>
+          Aura TROPika lahir di tanah tinggi Malaysia yang menghijau, di mana udaranya membawa haruman bumi yang dibasahi hujan,
+          bunga kemboja yang mekar, dan rempah yang dihangatkan matahari. Kami percaya wangian bukan sekadar bau —
+          ia adalah kenangan, suasana hati, dan makna yang terangkum dalam satu helaan nafas.
+        </p>
+        <p>
+          Setiap produk Aura TROPika dituang dengan teliti secara kelompok kecil menggunakan minyak pati daripada sumber lestari
+          dan bahan botani semula jadi. Dari kereta ke ruang tamu, wangian kami direka untuk mengubah ruang harian menjadi
+          sanctuary ketenangan, kegembiraan, dan hubungan. Tiada jalan pintas sintetik. Tiada bahan kimia keras.
+          Hanya intipati tropika yang tulen.
+        </p>
+        <div class="brand-divider"></div>
+        <p style="font-style:italic; color:#D4A373;">
+          "Kerana setiap helaan nafas anda sepatutnya terasa seperti pulang ke rumah."
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROMOTIONS ===== -->
+<section class="section promos" id="promos">
+  <p class="section-tag">✦ Special Offers</p>
+  <h2 class="section-title">Exclusive Deals Just for You</h2>
+  <p class="section-desc" style="margin-left:auto;margin-right:auto;">
+    Because everyone deserves a little luxury — especially students and festive celebrators.
+  </p>
+
+  <div class="promo-grid">
+    <!-- Student Discount -->
+    <div class="promo-card">
+      <span class="promo-icon">🎓</span>
+      <h3>Student Special</h3>
+      <p class="promo-highlight">20% OFF all Car Fragrance</p>
+      <p class="promo-detail">
+        Uni life is stressful enough — your drive shouldn't be. Flash your valid student ID
+        at checkout and enjoy <strong>20% off</strong> our entire Car Fragrance collection.
+        Valid for all Malaysian university & college students.
+      </p>
+      <span class="promo-code">STUDENT20</span>
+      <p class="promo-note">📌 Valid student ID required at pickup · One use per semester</p>
+    </div>
+
+    <!-- Raya Gift Box -->
+    <div class="promo-card">
+      <span class="promo-icon">🕌</span>
+      <h3>Raya Celebration Box</h3>
+      <p class="promo-highlight">Limited Edition · RM 128 only</p>
+      <p class="promo-detail">
+        This Hari Raya, give the gift of fragrance. Our <strong>Raya Spice Set</strong> features
+        four premium scents — Oud, Rose, Cinnamon & Cardamom — beautifully wrapped in a
+        handcrafted batik gift box with a personalized note card. Pre-order opens 2 weeks before Syawal.
+      </p>
+      <span class="promo-code">RAYA2026</span>
+      <p class="promo-note">🎁 Includes complimentary gift wrapping · Free shipping for orders above RM 150</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="contact">
+  <div class="footer-grid">
+    <div>
+      <h4>Contact</h4>
+      <p>📧 hello@auratropika.com</p>
+      <p>📱 +60 12-345 6789</p>
+      <p>📍 Kuala Lumpur, Malaysia</p>
+      <p style="margin-top:0.8rem;">🕐 Mon–Sat · 10AM – 7PM</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">→ Home</a></li>
+        <li><a href="#products">→ Shop All</a></li>
+        <li><a href="#story">→ Our Story</a></li>
+        <li><a href="#promos">→ Promotions</a></li>
+        <li><a href="#">→ Shipping & Returns</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Follow Us</h4>
+      <p style="margin-bottom:0.5rem;">Stay inspired with our latest scents and stories.</p>
+      <div class="social-links">
+        <a href="https://instagram.com/auratropika" class="social-link" title="Instagram" target="_blank">📷</a>
+        <a href="https://tiktok.com/@auratropika" class="social-link" title="TikTok" target="_blank">🎵</a>
+        <a href="https://facebook.com/auratropika" class="social-link" title="Facebook" target="_blank">📘</a>
+        <a href="https://wa.me/60123456789" class="social-link" title="WhatsApp" target="_blank">💬</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Aura TROPika. All rights reserved. Made with ❤️ in Malaysia.</p>
+  </div>
+</footer>
+
+<script>
+// Category tab switcher
+function showCategory(cat) {
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  ['car','home','gift'].forEach(c => {
+    document.getElementById('cat-'+c).style.display = (c === cat) ? '' : 'none';
+  });
+}
+
+// Smooth nav shrink on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  if (window.scrollY > 80) nav.style.height = '56px';
+  else nav.style.height = '64px';
+});
+</script>
+
+</body>
+</html>
